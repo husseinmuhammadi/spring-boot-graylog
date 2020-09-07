@@ -22,15 +22,8 @@ public class SpringBootConsoleApplication implements CommandLineRunner {
         LOGGER.info("APPLICATION FINISHED");
     }
 
-    private static final String PREFIX = "[";
-    private static final String SUFFIX = "]";
-
     @Override
     public void run(String... args) {
-        LOGGER.info("EXECUTING : command line runner");
-        StringJoiner joiner = new StringJoiner(",", PREFIX, SUFFIX);
-        Arrays.stream(args).forEach(joiner::add);
-        LOGGER.info(joiner.toString());
     }
 
     @Bean
