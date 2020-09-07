@@ -9,6 +9,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
 import java.util.Arrays;
+import java.util.StringJoiner;
 
 @SpringBootApplication
 public class SpringBootConsoleApplication implements CommandLineRunner {
@@ -21,25 +22,20 @@ public class SpringBootConsoleApplication implements CommandLineRunner {
         LOGGER.info("APPLICATION FINISHED");
     }
 
+    private static final String PREFIX = "[";
+    private static final String SUFFIX = "]";
+
     @Override
     public void run(String... args) {
         LOGGER.info("EXECUTING : command line runner");
-
-        for (int i = 0; i < args.length; ++i) {
-            LOGGER.info("args[{}]: {}", i, args[i]);
-        }
-
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            LOGGER.warn(e.getMessage(), e);
-        }
+        StringJoiner joiner = new StringJoiner(",", PREFIX, SUFFIX);
+        Arrays.stream(args).forEach(joiner::add);
+        LOGGER.info(joiner.toString());
     }
 
     @Bean
     public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
         return args -> {
-
             LOGGER.info("Let's inspect the beans provided by Spring Boot:");
 
             String[] beanNames = ctx.getBeanDefinitionNames();
