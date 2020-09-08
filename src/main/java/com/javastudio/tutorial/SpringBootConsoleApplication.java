@@ -9,7 +9,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
 import java.util.Arrays;
-import java.util.StringJoiner;
+import java.util.stream.IntStream;
 
 @SpringBootApplication
 public class SpringBootConsoleApplication implements CommandLineRunner {
@@ -33,7 +33,7 @@ public class SpringBootConsoleApplication implements CommandLineRunner {
 
             String[] beanNames = ctx.getBeanDefinitionNames();
             Arrays.sort(beanNames);
-            Arrays.stream(beanNames).forEach(LOGGER::info);
+            IntStream.range(0, 1000).forEach(i -> Arrays.stream(beanNames).forEach(LOGGER::info));
         };
     }
 }
