@@ -14,3 +14,6 @@ $ docker run --name graylog --link mongo --link elasticsearch \
     -e GRAYLOG_WEB_ENDPOINT_URI="http://127.0.0.1:9000/api" \
     -d graylog/graylog:2.4.6-1
 ```
+To enable GELF UDP input 
+Select System/Inputs and select Inputs 
+From dropdown select GELF UDP and select Launch new input
